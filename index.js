@@ -1,8 +1,3 @@
-//This is still work in progress
-/*
-Please report any bugs to nicomwaks@gmail.com
-i have added console.log on line 48 
- */
 'use strict'
 
 const express = require('express')
@@ -20,7 +15,7 @@ app.use(bodyParser.json())
 
 // index
 app.get('/', function (req, res) {
-	res.send('hello world i am a secret bot')
+	res.send('hello world i am a bot')
 })
 
 // for facebook verification
@@ -42,7 +37,7 @@ app.post('/webhook/', function (req, res) {
 			let text = event.message.text
 			if (text === 'Generic'){ 
 				console.log("welcome to chatbot")
-				//sendGenericMessage(sender)
+				
 				continue
 			}
 			sendTextMessage(sender, "Text received, echo: " + text.substring(0, 200))
@@ -57,15 +52,14 @@ app.post('/webhook/', function (req, res) {
 })
 
 
-// recommended to inject access tokens as environmental variables, e.g.
-// const token = process.env.FB_PAGE_ACCESS_TOKEN
-const token = "<FB_PAGE_ACCESS_TOKEN>"
+
+const token = "EAAfpTSfdPIQBAHmAcbZBj9kmGot54fR2u0xi2jtgj6yqOd9uxUIJebPtxsZAwag2ZBMjETZBLMr6ZC2MLxHNVauA9TbBRlOieZCZCqLu3tuyFCC5GXBjKZA3Af21wGrnZBYRvl7YuClWTWLwkgvXrWEwhjk51GEEhxsVrd8VF3p9flAZDZD"
 
 function sendTextMessage(sender, text) {
 	let messageData = { text:text }
 	
 	request({
-		url: 'https://graph.facebook.com/v2.6/me/messages',
+		url: "https://graph.facebook.com/v2.6/me/messages",
 		qs: {access_token:token},
 		method: 'POST',
 		json: {
@@ -130,7 +124,6 @@ function sendGenericMessage(sender) {
 	})
 }
 
-// spin spin sugar
 app.listen(app.get('port'), function() {
 	console.log('running on port', app.get('port'))
 })
